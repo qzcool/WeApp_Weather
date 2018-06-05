@@ -25,3 +25,21 @@
   height: 100%;
   z-index: -1
 }
+
+.timetips{
+  display: flex;
+  align-items: center;
+  margin-top: 40rpx;
+  justify-content: center;
+}
+
+.timetips-icon{
+  width: 36rpx;
+  height: 28rpx;
+}
+
+.timetips-text{
+  font-size: 30rpx;
+  line-height: 42rpx;
+  opacity: 0.6;
+}

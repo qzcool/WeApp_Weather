@@ -107,3 +107,9 @@
   line-height: 42rpx;
   color: rgba(0, 0, 0, 0.5)
 }
+
+.location{
+  text-align: center;
+  font-size: auto;
+  margin-top: auto;
+}

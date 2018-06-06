@@ -1,5 +1,6 @@
 <!--pages/index/index.wxml-->
 <view class='weather-wrapper'>
+  <view class='location'>北京市</view>
   <view class='temp'>{{nowTemp}}</view>
   <view class='weather'>{{nowWeather}}</view>
   <image class="weather-bg" src="{{imageSrc}}" mode="scaleToFill"></image>

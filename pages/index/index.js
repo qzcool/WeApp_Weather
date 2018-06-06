@@ -38,7 +38,7 @@ Page({
     wx.request({
       url: 'https://test-miniprogram.com/api/weather/now',
       data: {
-        city: '广州市'
+        city: '北京市'
       },
       success: res => {
         let result = res.data.result
@@ -92,9 +92,9 @@ Page({
       maxTemp: maxTemp + '°',
     })
   },
-  onTapExpand(){
-    wx.showToast({
-      title: '我爱你',
+  onTapExpand: () => {
+    wx.navigateTo({
+      url: '/pages/list/list',
     })
   }
 })

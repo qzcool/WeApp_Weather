@@ -21,7 +21,10 @@ Page({
   data:{
     nowTemp: '',
     nowWeather: '',
-    hourlyWeather: []
+    hourlyWeather: [],
+    dateToday: '',
+    minTemp: 2,
+    maxTemp: 5,
   },
   onPullDownRefresh(){
     this.getNow(()=>{
@@ -39,8 +42,10 @@ Page({
       },
       success: res => {
         let result = res.data.result
+        //console.log(result)
         this.setNow(result)
         this.setForecast(result)
+        this.setToday(result)
       },
       complete: () => {
         callback && callback()
@@ -74,6 +79,22 @@ Page({
     hourlyWeather[0].time = '现在'
     this.setData({
       hourlyWeather: hourlyWeather
+    })
+  },
+  setToday(result){
+    let date = new Date()
+    let today = result.today
+    let minTemp = today.minTemp
+    let maxTemp = today.maxTemp
+    this.setData({
+      dateToday: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 今天`,
+      minTemp: minTemp + '°' + '到',
+      maxTemp: maxTemp + '°',
+    })
+  },
+  onTapExpand(){
+    wx.showToast({
+      title: '我爱你',
     })
   }
 })

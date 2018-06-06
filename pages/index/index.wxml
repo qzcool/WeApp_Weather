@@ -3,6 +3,12 @@
   <view class='temp'>{{nowTemp}}</view>
   <view class='weather'>{{nowWeather}}</view>
   <image class="weather-bg" src="{{imageSrc}}" mode="scaleToFill"></image>
+  <view class='today-wrapper' bindtap='onTapExpand'>
+    <view class='today-date'>{{dateToday}}</view>
+    <view class='today-temp'>{{minTemp}}</view>
+    <view class='today-temp'>{{maxTemp}}</view>
+  <image class='today-icon' src='/images/arrow.png' mode="scaleToFill"></image>
+  </view>
 </view>
 
 <view class='timetips'>

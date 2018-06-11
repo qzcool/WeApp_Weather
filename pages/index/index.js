@@ -1,4 +1,8 @@
 // pages/index/index.js
+
+// 引入SDK核心类
+const QQMapWX = require('../../libs/qqmap-wx-jssdk.js')
+
 const weatherMap = {
   'sunny': '晴天',
   'cloudy': '多云',
@@ -25,6 +29,8 @@ Page({
     dateToday: '',
     minTemp: 2,
     maxTemp: 5,
+    city: '北京市',
+    locationTipsText: "点击获取当前位置"
   },
   onPullDownRefresh(){
     this.getNow(()=>{
@@ -32,13 +38,16 @@ Page({
     })
   },
   onLoad(){
+    this.qqmapsdk = new QQMapWX({
+      key: '6E4BZ-IHO66-RYUSH-MWROJ-7TEXZ-VSFMI'
+    })
     this.getNow()
   },
   getNow(callback){
     wx.request({
       url: 'https://test-miniprogram.com/api/weather/now',
       data: {
-        city: '北京市'
+        city: this.data.city
       },
       success: res => {
         let result = res.data.result
@@ -94,7 +103,29 @@ Page({
   },
   onTapExpand: () => {
     wx.navigateTo({
-      url: '/pages/list/list',
+      url: '/pages/list/list?city=' + this.data.city,
+    })
+  },
+  onTapLocation(){
+    wx.getLocation({
+      success: function(res) {
+        // 调用腾讯API接口
+        this.qqmapsdk.reverseGeocoder({
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude
+          },
+          success: function (resu) {
+            let city = resu.result.address_component.city
+            this.setData({
+              city: city,
+              locationTipsText: ""
+            })
+            this.getNow()            
+          }
+        })
+      },
     })
   }
 })
+

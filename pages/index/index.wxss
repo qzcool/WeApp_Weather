@@ -108,8 +108,26 @@
   color: rgba(0, 0, 0, 0.5)
 }
 
+.location-wrapper{
+  margin-bottom: 60rpx;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  color: rgba(0, 0, 0, 0.5)
+}
+
 .location{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.location-icon{
+  margin-right: 10rpx;
+  width: 21rpx;
+  height: 30rpx;
+}
+
+.location-tips{
+  margin-top:10rpx;
   text-align: center;
-  font-size: auto;
-  margin-top: auto;
 }

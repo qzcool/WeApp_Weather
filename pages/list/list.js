@@ -11,21 +11,25 @@ const weekdaysMap = {
 Page({
   data: {
     futureWeather: [],
+    city: '广州市'
   },
   onPullDownRefresh() {
     this.getNow(() => {
       wx.stopPullDownRefresh()
     })
   },
-  onLoad() {
+  onLoad(options) {
+    this.setData({
+      city: options.city
+    })
     this.getNow()
   },
   getNow(callback) {
     wx.request({
       url: 'https://test-miniprogram.com/api/weather/future',
       data: {
-        city: '广州市',
-        time: new Date()
+        city: this.data.city,
+        time: new Date()//.getTime()
       },
       success: res => {
         let result = res.data.result
@@ -39,11 +43,12 @@ Page({
   },
   setForecast(result) {
     let futureWeather = []
-    let date = new Date()
     for (let i = 0; i < 7; i += 1) {
+      let date = new Date()
+      date.setDate(date.getDate() + i)
       futureWeather.push({
-        weekdays: weekdaysMap[new Date().getDay+i],
-        date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+        weekdays: weekdaysMap[date.getDay()],
+        date: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
         tempRange: result[i].minTemp + '°' + '-' + result[i].maxTemp + '°',
         iconPath: '/images/' + result[i].weather + '-icon.png',
       })
